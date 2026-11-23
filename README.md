@@ -6,4 +6,4 @@ These are engineering case studies for work whose source code is private, employ
 - [Sterling Bank: RPA that had to survive a dropped connection](sterling-bank-rpa.md)
 - [Unified AI: a multi-agent system with staged external actions](unified-ai.md)
 
-The numbers in these studies are the ones I can support from my work record. Where a metric is private or unconfirmed, the study uses a qualitative result instead.
+These studies use the facts I can support from my work record. Where a detail is private or unconfirmed, the study uses a qualitative result instead.

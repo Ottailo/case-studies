@@ -21,11 +21,11 @@ The alternative was a linear script that assumed every call returned cleanly. It
 
 ## The implementation
 
-The work included Python automation for batch data transfer into SeaBass Core Banking and monitoring for ATM telemetry and database feeds. The automation reduced manual processing time by 65% against the previous process.
+The work included Python automation for batch data transfer into SeaBass Core Banking and monitoring for ATM telemetry and database feeds. The automation cut the manual processing time substantially against the previous process.
 
 ## The result
 
-The manual processing time for the automated batch flow dropped by 65%. The retry path was designed to avoid duplicate postings, and the support team had a state record to inspect when a link failed.
+The automated batch flow cut the manual processing time substantially. The retry path was designed to avoid duplicate postings, and the support team had a state record to inspect when a link failed.
 
 ## What I would change
 
@@ -33,4 +33,4 @@ I would make the state of each batch visible to the operations team from day one
 
 ## What stays private
 
-Bank customer data, internal system details, production credentials, and the bank's source code are not included here. The 65% figure comes from my CV and the work record available to me.
+Bank customer data, internal system details, production credentials, and the bank's source code are not included here. The work record behind this is private.

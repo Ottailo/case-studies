@@ -4,7 +4,7 @@ VibesMeet runs live event experiences for large in-person audiences. My work sat
 
 ## The constraint
 
-A live event is a bad time to discover that your system assumes a stable network. Thousands of people arrive in one place, connect to the same congested cell towers, and open the app at the same moment. When the network hiccups, they do not fail politely one at a time. They drop together, reconnect together, and turn a small outage into a traffic spike.
+A live event is a bad time to discover that your system assumes a stable network. A large crowd arrives in one place, connect to the same congested cell towers, and open the app at the same moment. When the network hiccups, they do not fail politely one at a time. They drop together, reconnect together, and turn a small outage into a traffic spike.
 
 The second constraint was abuse. Event tickets and giveaways carry real value. A weak identity check or a predictable giveaway flow becomes a way to manipulate the event, not just a bug.
 
@@ -32,9 +32,9 @@ The platform used WebSockets for live messaging and event state, PostgreSQL for 
 
 ## The result
 
-Events ran with thousands of attendees connected at once, including periods when mobile networks were unstable. The reconnect behavior stopped being the thing that took the platform down. The KYC and fraud services gave the operations team a review path instead of an all-or-nothing block.
+Events ran with a full venue connected at once, including periods when mobile networks were unstable. The reconnect behavior stopped being the thing that took the platform down. The KYC and fraud services gave the operations team a review path instead of an all-or-nothing block.
 
-The exact peak attendance is not something I publish without the event owner's approval, so the case study uses the conservative description: thousands of attendees at once.
+I am not publishing the exact attendance figure; the case study uses a qualitative description: a full venue connected at once.
 
 ## What I would change
 
