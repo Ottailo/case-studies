@@ -10,10 +10,10 @@ The second constraint was visibility. ATM and branch operations generate a lot o
 
 ## The decision
 
-I built the automation around idempotency and explicit state.
+I wrote the automation around a simple rule: a timeout is an unknown outcome, not a clean failure.
 
-- Each operation carried a stable identity, so a retry could be recognized instead of duplicated.
-- Transaction state was tracked in a durable record with atomic updates.
+- Each operation was identified so a retry could be checked instead of blindly re-posted.
+- The batch flow kept a state record the operations team could inspect.
 - The RPA layer treated a timeout as an unknown outcome, not a failure that could be retried blindly.
 - ATM telemetry and database feeds were monitored for bottlenecks and synchronization failures rather than only for process liveness.
 
@@ -21,15 +21,15 @@ The alternative was a linear script that assumed every call returned cleanly. It
 
 ## The implementation
 
-The work included Python automation for batch data transfer into SeaBass Core Banking, idempotent transaction queues with atomic cryptographic state tracking, and monitoring for ATM telemetry and database feeds. The automation reduced manual processing time by 65% against the previous process.
+The work included Python automation for batch data transfer into SeaBass Core Banking and monitoring for ATM telemetry and database feeds. The automation reduced manual processing time by 65% against the previous process.
 
 ## The result
 
-The manual processing time for the automated batch flow dropped by 65%. The more important result was operational: the automation could be retried without creating duplicate postings, and the support team had a state record to inspect when a link failed.
+The manual processing time for the automated batch flow dropped by 65%. The retry path was designed to avoid duplicate postings, and the support team had a state record to inspect when a link failed.
 
 ## What I would change
 
-I would make the queue's state machine visible to the operations team from day one, with a simple screen showing pending, completed, and needs-review transactions. The backend was correct; the human handoff could have been clearer.
+I would make the state of each batch visible to the operations team from day one, with a simple screen showing pending, completed, and needs-review transactions. The state handling was the part I cared about; the human handoff could have been clearer.
 
 ## What stays private
 

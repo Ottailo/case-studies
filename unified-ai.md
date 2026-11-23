@@ -1,4 +1,4 @@
-# Unified AI: a human-in-the-loop multi-agent system
+# Unified AI: a multi-agent system with staged external actions
 
 Unified AI is a personal operating system I built to run long-lived workflows across coding, job discovery, market monitoring, writing, and personal operations. It is not a commercial product. It is a working system I use, and it is where I test ideas about agent orchestration, memory, and approval boundaries.
 
@@ -15,7 +15,7 @@ I built the system around a small number of explicit invariants:
 - State graphs for multi-step workflows, so a task has a current state instead of a growing chat log.
 - Persistent memory in SQLite and a vector store, so facts survive a restart and can be retrieved by meaning.
 - A tool layer with clear inputs and outputs, rather than free-form shell access from the model.
-- Human approval gates for external actions: email, applications, publishing, and trading.
+- Staged paths for external actions: the job-search workflow can prepare applications and emails, and dispatch is constrained by fit score, daily quota, dedupe, and an explicit environment gate. The live code still has auto-submit paths, so I do not claim a universal human approval gate.
 - A local router that can send a request to different models instead of hard-coding one provider.
 
 The alternative was a single long prompt with a pile of tools. It looks impressive in a demo and becomes impossible to debug when a tool fails halfway through.
@@ -24,11 +24,11 @@ The alternative was a single long prompt with a pile of tools. It looks impressi
 
 The system runs as a FastAPI service with a Telegram control surface and a set of background workers. It uses LangGraph-style state transitions, CrewAI/AutoGen for delegated work, SQLite for durable local state, and a local gateway for model routing. The tool surface includes job discovery, CV tailoring, market telemetry, content drafting, and file and repository operations.
 
-The job-search workflow is a useful example of the boundary. The system can scan roles, score fit, tailor a CV, and prepare an application. It stops before sending anything unless the user has enabled the specific action. That is deliberate. The value is in the preparation and the audit trail, not in removing the human from the final decision.
+The job-search workflow is a useful example of the boundary. The system can scan roles, score fit, tailor a CV, and prepare an application. Dispatch channels exist and are constrained by fit score, daily quota, dedupe, and a staged path for review. The live code still has auto-submit paths, so I do not claim that every action waits for a human. The value is in the preparation and the audit trail; the next step is a stricter per-action approval gate.
 
 ## The result
 
-The system runs daily on a small Oracle Cloud ARM instance. It has replaced a collection of one-off scripts with a single service that can be inspected, restarted, and extended. The most useful result is not a benchmark. It is that the workflows are boring enough to trust: the state is on disk, the tool calls are visible, and the dangerous actions have a gate.
+The system runs daily on a small Oracle Cloud ARM instance. It has replaced a collection of one-off scripts with a single service that can be inspected, restarted, and extended. The most useful result is not a benchmark. It is that the workflows are boring enough to trust: the state is on disk, the tool calls are visible, and external actions have a staged path and an audit trail. The next step is a stricter per-action approval gate.
 
 ## What I would change
 
